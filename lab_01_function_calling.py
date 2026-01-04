@@ -11,8 +11,6 @@ api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
     print("❌ Error: API Key not found in .env file")
     exit()
-
-# 2. Initialize the Client (The New Way)
 client = genai.Client(api_key=api_key)
 
 # --- 🛠️ THE TOOLS ---
@@ -62,10 +60,8 @@ while True:
         if user_input.lower() in ["exit", "quit"]:
             break
             
-        # Send message
         response = chat.send_message(user_input)
         
-        # In the new SDK, text is usually in response.text
         print(f"AI: {response.text}")
         
     except KeyboardInterrupt:
