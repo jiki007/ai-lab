@@ -3,6 +3,7 @@ import random
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
+import platform
 
 # 1. Load Credentials
 load_dotenv()
@@ -38,6 +39,13 @@ def flip_coin() -> str:
     print("\n[SYSTEM] ⚙️ TOOL ACTIVE: Flipping a coin...")
     return random.choice(['Heads', 'Tails'])
 
+def get_system_info():
+    """
+    Returning your current OS and Python version.
+    """
+    print("\n[SYSTEM ⚙️ TOOL ACTIVE: Identifying the OS and Python version....]")
+    return f"OS: {platform.system()} {platform.release()}, Python: {platform.python_version()}"
+
 # --- 🧠 THE BRAIN ---
 print("--- 🟢 LEVEL 1 LAB: Function Calling (Modern SDK) ---")
 
@@ -45,7 +53,7 @@ print("--- 🟢 LEVEL 1 LAB: Function Calling (Modern SDK) ---")
 chat = client.chats.create(
     model='gemini-2.5-flash',
     config=types.GenerateContentConfig(
-        tools=[basic_calculator, flip_coin], # Pass functions directly
+        tools=[basic_calculator, flip_coin, get_system_info], # Pass functions directly
         automatic_function_calling=types.AutomaticFunctionCallingConfig(
             disable=False # This enables the AI to run the code itself
         )
