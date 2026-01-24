@@ -39,7 +39,7 @@ def flip_coin() -> str:
     print("\n[SYSTEM] ⚙️ TOOL ACTIVE: Flipping a coin...")
     return random.choice(['Heads', 'Tails'])
 
-def get_system_info():
+def get_system_info() -> str:
     """
     Returning your current OS and Python version.
     """
